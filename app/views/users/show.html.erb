@@ -1,0 +1,25 @@
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div id="alert-message error">
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+  	
+	<ul class="unstyled">
+		<li>Username: <%= @user.username %></li>
+		<li>Email Address: <%= @user.email %></li>
+    <li>Adress: <%= @user.address_field1 %></li>
+    <li><%= @user.address_field2 %></li>
+    <li>State: <%= @user.state %></li>
+		<li>Zipcode: <%= @user.zipcode %></li>
+    <li>&nbsp;</li>
+    <li>Role: <%= @user.role %></li>
+	</ul>
+    
+  </div>
+<% end %>

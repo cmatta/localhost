@@ -1,0 +1,27 @@
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div id="alert-message error">
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+  	
+	<ul class="unstyled">
+		<li>Username: <%= @user.username %></li>
+		<li>Email Address: <%= @user.email %></li>
+		<li><%= f.label :address_field1, "Address" %><%= f.text_field :address_field1 %></li>
+		<li><%= f.label :address_field2, "" %><%= f.text_field :address_field2 %></li>
+    <li><%= f.label :city, "City" %><%= f.text_field :city %></li>
+		<li><%= f.label :state, "State" %><%= f.select :state, Carmen::states('US') %></li>
+    <li><%= f.label :zipcode, "Zipcode" %><%= f.text_field :zipcode, :size => 5 %></li>
+    <li>&nbsp;</li>
+    <li><%= f.label :Role, "Role" %><%= f.collection_select :role, User::ROLES, :to_s, :humanize %></li>
+		<li><%= f.submit 'Submit', :class=> "btn" %></li>
+	</ul>
+    
+  </div>
+<% end %>

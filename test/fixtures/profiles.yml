@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  first_name: MyString
+  last_name: MyString
+  address_field1: MyString
+  address_field2: MyString
+  city: MyString
+  state: MyString
+  zipcode: 1
+
+two:
+  first_name: MyString
+  last_name: MyString
+  address_field1: MyString
+  address_field2: MyString
+  city: MyString
+  state: MyString
+  zipcode: 1
