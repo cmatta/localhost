@@ -81,24 +81,25 @@
     <div class="topbar">
       <div class="fill">
         <div class="container">
-          <a class="brand" href="#">Be My Guest</a>
+          <a class="brand" href="<%= root_url %>">Be My Guest</a>
           <ul class="nav">
             <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="<%= users_url %>">Users</a></li>
           </ul>
             <div class="pull-right"
         		  <% if current_user %>
-        			 <p>Logged in as <%= link_to current_user.username, edit_user_path(current_user) %> (<%= link_to "Sign Out", logout_path %>)</p>
+        			 <p>Logged in as <%= link_to current_user.username, user_path(current_user) %> (<%= link_to "Sign Out", logout_path %>)</p>
         		  <% else %>
-        			 <%= form_tag sessions_path, do %>
+              <p><%= link_to "Log In", login_path %></p>
+        			 <!-- <%= form_tag sessions_path, do %>
         		    <%= text_field_tag :username, params[:username], :class => "input-small" %>
         		    <%= password_field_tag :password, nil, :class => "input-small" %>
         		  
-        		    <!-- <%= check_box_tag :remember_me, 1, params[:remember_me] %> -->
-        		    <!-- <%= label_tag :remember_me %> -->
+        		    <%= check_box_tag :remember_me, 1, params[:remember_me] %>
+        		    <%= label_tag :remember_me %>
         		  
-        				<%= submit_tag "Log in" %></div>
+                <%= submit_tag "Log in" %>--></div>
         			 <% end %>
         		  <% end %>
             </div>

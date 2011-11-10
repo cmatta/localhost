@@ -8,16 +8,19 @@
   <th>Role</th>
   <th></th>
   <th></th>
+  <th></th>
   </tr>
 
 <% @user.each do |user| %>
     <tr>
-    <td><%= user.first_name %><%= user.last_name%></td>
+      <td><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></td>
       <td><%= user.email%></td>
       <td><%= user.state %></td>
       <td><%= user.role %></td>
-     <td><%= link_to 'Edit', edit_user_path(user) if current_user %></td>
+      <td><%= button_to "Add Friendship", friendships_path(:friend_id => user), :mehtod => :post if current_user %></td>
+      <td><%= link_to 'Edit', edit_user_path(user) if current_user %></td>
       <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete if current_user%></td>
+      
     </tr>
 <% end %>
 </table>

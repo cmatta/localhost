@@ -13,6 +13,8 @@
 	<ul class="unstyled">
 		<li>Username: <%= @user.username %></li>
 		<li>Email Address: <%= @user.email %></li>
+    <li><%= f.label :first_name, "First Name" %><%= f.text_field :first_name %>
+    <li><%= f.label :last_name, "Last Name" %><%= f.text_field :last_name %>
 		<li><%= f.label :address_field1, "Address" %><%= f.text_field :address_field1 %></li>
 		<li><%= f.label :address_field2, "" %><%= f.text_field :address_field2 %></li>
     <li><%= f.label :city, "City" %><%= f.text_field :city %></li>

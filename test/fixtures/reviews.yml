@@ -1,0 +1,13 @@
+one:
+  title: MyString
+  review: MyText
+  user_id: 1
+  reviewer_id: 1
+  rating: 1
+
+two:
+  title: MyString
+  review: MyText
+  user_id: 1
+  reviewer_id: 1
+  rating: 1

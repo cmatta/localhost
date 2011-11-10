@@ -10,16 +10,33 @@
 
   <div class="actions">
   	
+  <div class="pull-right"><%= link_to "Edit User", edit_user_path(@user) %></div>
 	<ul class="unstyled">
+    <li><h2><%= "#{@user.first_name} #{@user.last_name}" %></li></h2>
 		<li>Username: <%= @user.username %></li>
 		<li>Email Address: <%= @user.email %></li>
     <li>Adress: <%= @user.address_field1 %></li>
     <li><%= @user.address_field2 %></li>
+    <li><%= @user.city %></li>
     <li>State: <%= @user.state %></li>
 		<li>Zipcode: <%= @user.zipcode %></li>
     <li>&nbsp;</li>
     <li>Role: <%= @user.role %></li>
 	</ul>
+  <h3>Friends</h3>
+  <ul>
+      <% for friendship in @user.friendships %>
+        <li><%= link_to friendship.friend.username, user_path(friendship.friend.id) %> (<%= link_to "remove", friendship, :method => :delete %>)</li>
+      <% end %>
+  </ul>
+
+  <h3>Friended By</h3>
+  <ul>
+    <% for user in @user.inverse_friends %>
+      <li><%= link_to user.username, user_path(user.id) %></li>
+    <% end %>
+  </ul> 
+        
     
   </div>
 <% end %>
