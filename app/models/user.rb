@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
   
   has_many :reviews
-  has_many :reviewers, :through => :reviews, :source => :user
-  has_many :reviewees, :through => :reviews, :source => :user
+  # has_many :reviewers, :through => :reviews, :source => :user
+  #   has_many :reviewees, :through => :reviews, :source => :user
   has_many :reviews_written, :class_name => "Review", :foreign_key => 'reviewer_id'
   has_many :reviews_about, :class_name => "Review", :foreign_key => 'reviewee_id'
 
