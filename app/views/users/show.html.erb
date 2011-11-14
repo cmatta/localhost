@@ -10,7 +10,7 @@
 
   <div class="actions">
   	
-  <div class="pull-right"><%= link_to "Edit User", edit_user_path(@user) %></div>
+  <div class="pull-right"><%= link_to "Edit Profile", edit_user_path(@user) if current_user == @user %></div>
 	<ul class="unstyled">
     <li><h2><%= "#{@user.first_name} #{@user.last_name}" %></li></h2>
 		<li>Username: <%= @user.username %></li>
@@ -26,7 +26,7 @@
   <h3>Friends</h3>
   <ul>
       <% for friendship in @user.friendships %>
-        <li><%= link_to friendship.friend.username, user_path(friendship.friend.id) %> (<%= link_to "remove", friendship, :method => :delete %>)</li>
+        <li><%= link_to friendship.friend.username, user_path(friendship.friend.id) %> <% if current_user == @user %>(<%= link_to "remove", friendship, :method => :delete %>)<% end %></li>
       <% end %>
   </ul>
 
@@ -36,6 +36,21 @@
       <li><%= link_to user.username, user_path(user.id) %></li>
     <% end %>
   </ul> 
+
+  <h3>Reviews</h3>
+  <ul>
+      <% @user.reviews.each do |review| %> 
+        <li><%= link_to review.title, review %> written by <%= review.reviewer.username %></li>
+      <% end %>
+  </ul>
+	<h3>Reviews About this user</h3>
+	  <ul>
+	      <% @user.reviews_about(@user) do |review| %> 
+	        <li><%= link_to review.title, review %> written by <%= review.reviewer.username %></li>
+	      <% end %>
+	  </ul>
+  
+  <div class="pull-right"><%= link_to "Write a review for this user", new_review_path(:reviewee_id => params[:id]) %></div>
         
     
   </div>

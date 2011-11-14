@@ -1,13 +1,13 @@
 one:
-  title: MyString
-  review: MyText
-  user_id: 1
   reviewer_id: 1
+  reviewee_id: 1
+  title: MyString
+  body: MyText
   rating: 1
 
 two:
-  title: MyString
-  review: MyText
-  user_id: 1
   reviewer_id: 1
+  reviewee_id: 1
+  title: MyString
+  body: MyText
   rating: 1

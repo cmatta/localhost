@@ -17,7 +17,11 @@
       <td><%= user.email%></td>
       <td><%= user.state %></td>
       <td><%= user.role %></td>
-      <td><%= button_to "Add Friendship", friendships_path(:friend_id => user), :mehtod => :post if current_user %></td>
+      <% if current_user.friends.find_by_id(user) %>
+        <td>Friend</td>
+      <% else %>
+        <td><%= button_to "Add Friendship", friendships_path(:friend_id => user), :method => :post if current_user %></td>
+      <% end %>
       <td><%= link_to 'Edit', edit_user_path(user) if current_user %></td>
       <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete if current_user%></td>
       

@@ -1,10 +1,10 @@
 class CreateReviews < ActiveRecord::Migration
   def self.up
     create_table :reviews do |t|
-      t.string :title
-      t.text :review
-      t.integer :user_id
       t.integer :reviewer_id
+      t.integer :reviewee_id
+      t.string :title
+      t.text :body
       t.integer :rating
       t.timestamps
     end

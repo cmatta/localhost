@@ -1,7 +1,7 @@
 Localhost::Application.routes.draw do
 
+  resources :reviews
   resources :friendships
-
   resources :users
   resources :sessions
 
