@@ -39,13 +39,13 @@
 
   <h3>Reviews</h3>
   <ul>
-      <% @user.reviews.each do |review| %> 
+      <% @user.reviews_written.each do |review| %> 
         <li><%= link_to review.title, review %> written by <%= review.reviewer.username %></li>
       <% end %>
   </ul>
 	<h3>Reviews About this user</h3>
 	  <ul>
-	      <% @user.reviews_about(@user) do |review| %> 
+	      <% @user.reviews_about.each do |review| %> 
 	        <li><%= link_to review.title, review %> written by <%= review.reviewer.username %></li>
 	      <% end %>
 	  </ul>

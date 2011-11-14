@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_many :reviewers, :through => :reviews, :source => :user
   has_many :reviewees, :through => :reviews, :source => :user
+  has_many :reviews_written, :class_name => "Review", :foreign_key => 'reviewer_id'
+  has_many :reviews_about, :class_name => "Review", :foreign_key => 'reviewee_id'
+
   
   authenticates_with_sorcery!
   
@@ -23,10 +26,6 @@ class User < ActiveRecord::Base
   
   def role_symbols
     [role.to_sym]
-  end
-  
-  def reviews_about
-    Review.find_all_by_reviewee_id(:id)
   end
   
 end
