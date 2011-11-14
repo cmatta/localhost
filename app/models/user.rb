@@ -25,8 +25,8 @@ class User < ActiveRecord::Base
     [role.to_sym]
   end
   
-  def reviews_about(id)
-    Review.find_all_by_reviewee_id(id)
+  def reviews_about
+    Review.find_all_by_reviewee_id(:id)
   end
   
 end
