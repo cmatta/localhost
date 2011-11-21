@@ -1,4 +1,10 @@
 class UsersController < ApplicationController
+  before_filter :require_login, except: [:new, :create, :show]
+  
+  filter_access_to :edit, :update, :attribute_check => true
+  
+  
+  
   def new
     @user = User.new
   end
@@ -6,6 +12,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      user = login(params[:username], params[:password], params[:remember_me])
       redirect_to edit_user_path(@user), :notice => "Account Created for #{@user.username}"
     else
       render :new

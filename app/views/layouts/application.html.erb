@@ -27,9 +27,6 @@
       .container > footer p {
         text-align: center; /* center align it with the container */
       }
-      .container {
-        width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
-      }
 
       /* The white background content wrapper */
       .content {
@@ -87,19 +84,16 @@
             <li><a href="#about">About</a></li>
             <li><a href="<%= users_url %>">Users</a></li>
           </ul>
-            <div class="pull-right"
+            <div class="pull-right">
         		  <% if current_user %>
         			 <p>Logged in as <%= link_to current_user.username, user_path(current_user) %> (<%= link_to "Sign Out", logout_path %>)</p>
         		  <% else %>
-              <p><%= link_to "Log In", login_path %></p>
-        			 <!-- <%= form_tag sessions_path, do %>
-        		    <%= text_field_tag :username, params[:username], :class => "input-small" %>
-        		    <%= password_field_tag :password, nil, :class => "input-small" %>
+            
+        			<%= form_tag sessions_path, do %>
+        		    	<%= text_field_tag :username, params[:username], :class => "input-small" %>
+        		    	<%= password_field_tag :password, nil, :class => "input-small" %>
         		  
-        		    <%= check_box_tag :remember_me, 1, params[:remember_me] %>
-        		    <%= label_tag :remember_me %>
-        		  
-                <%= submit_tag "Log in" %>--></div>
+                		<%= submit_tag "Log in" %>
         			 <% end %>
         		  <% end %>
             </div>

@@ -1,57 +1,65 @@
-<%= form_for @user do |f| %>
-  <% if @user.errors.any? %>
-    <div id="alert-message error">
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="actions">
-  	
-  <div class="pull-right"><%= link_to "Edit Profile", edit_user_path(@user) if current_user == @user %></div>
-	<ul class="unstyled">
-    <li><h2><%= "#{@user.first_name} #{@user.last_name}" %></li></h2>
-		<li>Username: <%= @user.username %></li>
-		<li>Email Address: <%= @user.email %></li>
-    <li>Adress: <%= @user.address_field1 %></li>
-    <li><%= @user.address_field2 %></li>
-    <li><%= @user.city %></li>
-    <li>State: <%= @user.state %></li>
-		<li>Zipcode: <%= @user.zipcode %></li>
-    <li>&nbsp;</li>
-    <li>Role: <%= @user.role %></li>
-	</ul>
-  <h3>Friends</h3>
-  <ul>
-      <% for friendship in @user.friendships %>
-        <li><%= link_to friendship.friend.username, user_path(friendship.friend.id) %> <% if current_user == @user %>(<%= link_to "remove", friendship, :method => :delete %>)<% end %></li>
-      <% end %>
-  </ul>
-
-  <h3>Friended By</h3>
-  <ul>
-    <% for user in @user.inverse_friends %>
-      <li><%= link_to user.username, user_path(user.id) %></li>
-    <% end %>
-  </ul> 
-
-  <h3>Reviews</h3>
-  <ul>
-      <% @user.reviews_written.each do |review| %> 
-        <li><%= link_to review.title, review %> written by <%= review.reviewer.username %></li>
-      <% end %>
-  </ul>
-	<h3>Reviews About this user</h3>
-	  <ul>
-	      <% @user.reviews_about.each do |review| %> 
-	        <li><%= link_to review.title, review %> written by <%= review.reviewer.username %></li>
-	      <% end %>
+<% if @user.errors.any? %>
+	<div id="alert-message error">
+	  <% @user.errors.full_messages.each do |msg| %>
+	    <li><%= msg %></li>
+	  <% end %>
 	  </ul>
-  
-  <div class="pull-right"><%= link_to "Write a review for this user", new_review_path(:reviewee_id => params[:id]) %></div>
-        
-    
-  </div>
+	</div>
 <% end %>
+<% if @user != current_user %>
+	<div class="pull-right">
+		<%= link_to "Write a review for this user", new_review_path(:reviewee_id => params[:id]) %>
+	</div>
+<% end %>
+<div class="row">
+	<div class="span4">
+		<div class="row">
+			<ul class="unstyled">
+		    <li><h2><%= "#{@user.first_name} #{@user.last_name}" %></li></h2>
+				<% if @user.profilepic %>
+					<li><%= image_tag @user.profilepic.url(:small) %></li>
+				<% else %>
+					<li>no profile picture uploaded</li>
+				<% end %>
+				<li>Username: <%= @user.username %></li>
+			    <li>City: <%= @user.city %></li>
+				</ul>
+		</div>
+		<div class="row">
+			<h3>Friends</h3>
+			  <ul>
+			      <% @user.friendships.each do |friendship| %>
+			        <li><%= link_to friendship.friend.username, user_path(friendship.friend.id) %> 
+						<% if permitted_to? :destroy, friendship %>
+							(<%= link_to "remove", friendship, :method => :delete %>)
+						<% end %>
+					</li>
+			      <% end %>
+
+			  </ul>
+		</div>
+		<div class="row">
+			<h3>Reviews by <%= @user.first_name %></h3>
+			  <ul>
+			      <% @user.reviews_written.each do |review| %> 
+			        <li><%= link_to review.title, review %></li>
+			      <% end %>
+			  </ul>
+		</div>
+	</div>
+	<div class="span12">
+		<div class="row">
+		  	<% @user.reviews_about.each do |review| %> 
+		        <div class="span8">
+					<h3><%= link_to review.title, review %></h3>
+					<p class="small">written by <%= link_to "#{review.reviewer.first_name} #{review.reviewer.last_name}", user_path(review.reviewer) %></p>
+					<p><%=h truncate(review.body, :length => 150, :omission => '...(continued)') %></p>
+					<hr>
+				</div>
+		      <% end %>
+		</div>
+	</div>
+
+</div>
+
+

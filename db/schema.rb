@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111110181554) do
+ActiveRecord::Schema.define(:version => 20111116225940) do
+
+  create_table "assignments", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -28,11 +35,16 @@ ActiveRecord::Schema.define(:version => 20111110181554) do
     t.integer  "rating"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",                                                        :null => false
+    t.string   "username",                                    :null => false
     t.string   "email"
     t.string   "crypted_password"
     t.string   "salt"
@@ -45,9 +57,17 @@ ActiveRecord::Schema.define(:version => 20111110181554) do
     t.string   "address_field2"
     t.string   "city"
     t.string   "state"
-    t.string   "role",                                        :default => "user"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "profile_pic_filename"
+    t.string   "profile_pic_contenttype"
+    t.integer  "profile_pic_size"
+    t.datetime "profile_pic_updated_at"
+    t.string   "profilepic_file_name"
+    t.string   "profilepic_content_type"
+    t.integer  "profilepic_file_size"
+    t.datetime "profilepic_updated_at"
+    t.string   "roles"
   end
 
   add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"

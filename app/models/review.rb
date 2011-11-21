@@ -12,5 +12,6 @@ class Review < ActiveRecord::Base
   def self.reviewer
     User.find_by_id(:reviewer_id)
   end
+  
     
 end

@@ -1,13 +1,1 @@
-<%= form_for @review, :url => { :action => "create" } do |f| %>
-  
-  <div class="field">
-	<%= f.hidden_field :reviewee_id, :value => params[:reviewee_id] %>
-    <p><%= f.label :title %></p>
-    <p><%= f.text_field :title %></p>
-
-    <p><%= f.text_area :body, :rows => '12', :cols => 65 %></p>
-  
- 
-    <p><%= f.submit "Submit Review" %></p>
-  </div>
-<% end %>
+<%= render 'form' %>

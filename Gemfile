@@ -11,6 +11,8 @@ gem 'declarative_authorization'
 gem 'carmen'
 gem "nifty-generators", :group => :development
 gem 'mocha'
+gem 'aws-s3'
+gem 'paperclip', "~> 2.4"
 
 # Gems used only for assets and not required
 # in production environments by default.

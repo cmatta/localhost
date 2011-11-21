@@ -16,15 +16,20 @@
       <td><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></td>
       <td><%= user.email%></td>
       <td><%= user.state %></td>
-      <td><%= user.role %></td>
+      <td><% user.roles.each do |role| %><%= role.name %> <% end %></td>
       <% if current_user.friends.find_by_id(user) %>
         <td>Friend</td>
-      <% else %>
-        <td><%= button_to "Add Friendship", friendships_path(:friend_id => user), :method => :post if current_user %></td>
+      <% elsif user == current_user %>
+		<td></td>
+	  <% else %>
+        <td><%= button_to "Add Friendship", friendships_path(:friend_id => user), :method => :post %></td>
       <% end %>
-      <td><%= link_to 'Edit', edit_user_path(user) if current_user %></td>
-      <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete if current_user%></td>
-      
+	 <td> <% if permitted_to? :edit, @user %>
+      		<%= link_to 'Edit', edit_user_path(user) %>
+      	  <% end %></td>
+	<td><% if permitted_to? :delete, @user %>
+      		<%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %>
+    	<% end %></td>
     </tr>
 <% end %>
 </table>
