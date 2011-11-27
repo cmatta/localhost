@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111116225940) do
+ActiveRecord::Schema.define(:version => 20111121203902) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -59,10 +59,6 @@ ActiveRecord::Schema.define(:version => 20111116225940) do
     t.string   "state"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "profile_pic_filename"
-    t.string   "profile_pic_contenttype"
-    t.integer  "profile_pic_size"
-    t.datetime "profile_pic_updated_at"
     t.string   "profilepic_file_name"
     t.string   "profilepic_content_type"
     t.integer  "profilepic_file_size"

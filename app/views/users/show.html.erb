@@ -1,3 +1,4 @@
+
 <% if @user.errors.any? %>
 	<div id="alert-message error">
 	  <% @user.errors.full_messages.each do |msg| %>
@@ -6,6 +7,10 @@
 	  </ul>
 	</div>
 <% end %>
+<!-- <div class="alert-message block-message success fade in" data-dropdown="dropdown">
+	<a href="#" class="dropdown-toggle">Debug</a>
+	<%= debug @user %>
+</div> -->
 <% if @user != current_user %>
 	<div class="pull-right">
 		<%= link_to "Write a review for this user", new_review_path(:reviewee_id => params[:id]) %>
@@ -16,14 +21,15 @@
 		<div class="row">
 			<ul class="unstyled">
 		    <li><h2><%= "#{@user.first_name} #{@user.last_name}" %></li></h2>
-				<% if @user.profilepic %>
-					<li><%= image_tag @user.profilepic.url(:small) %></li>
-				<% else %>
-					<li>no profile picture uploaded</li>
-				<% end %>
+				<li><%= image_tag @user.profilepic.url(:small) %></li>
 				<li>Username: <%= @user.username %></li>
 			    <li>City: <%= @user.city %></li>
+				<% if permitted_to? :edit, @user %>
+					<li><%= link_to "Edit your account", edit_user_path %></li>
+				<% end %>
 				</ul>
+				Average Rating: <%= render "rating" %>
+				
 		</div>
 		<div class="row">
 			<h3>Friends</h3>

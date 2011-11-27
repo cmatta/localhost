@@ -14,12 +14,14 @@ gem 'mocha'
 gem 'aws-s3'
 gem 'paperclip', "~> 2.4"
 
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
+  gem 'less-rails-bootstrap'
 end
 
 gem 'jquery-rails'

@@ -1,9 +1,7 @@
 authorization do
   role :admin do
     includes [:moderator, :user, :guest]
-    has_permission_on :users, to: [:read, :manage] do
-      if_attribute :id => is {user.id}
-    end
+    has_permission_on :users, to: [:read, :manage]
   end
   
   role :moderator do
@@ -23,7 +21,8 @@ authorization do
     end
     
     has_permission_on :reviews, to: [:show] 
-    has_permission_on :reviews, to: [:new, :create, :edit, :update, :destroy] do
+    has_permission_on :reviews, to: [:create]
+    has_permission_on :reviews, to: [:manage] do
       if_attribute :reviewer_id => is  { user.id }
     end
   end

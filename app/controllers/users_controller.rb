@@ -3,8 +3,6 @@ class UsersController < ApplicationController
   
   filter_access_to :edit, :update, :attribute_check => true
   
-  
-  
   def new
     @user = User.new
   end
@@ -12,8 +10,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      user = login(params[:username], params[:password], params[:remember_me])
-      redirect_to edit_user_path(@user), :notice => "Account Created for #{@user.username}"
+      user = auto_login(@user)
+      redirect_to edit_user_path(user), :notice => "Account Created for #{@user.username}"
     else
       render :new
     end
@@ -29,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def update
@@ -46,6 +44,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
 
     respond_to do |format|

@@ -24,11 +24,11 @@
 	  <% else %>
         <td><%= button_to "Add Friendship", friendships_path(:friend_id => user), :method => :post %></td>
       <% end %>
-	 <td> <% if permitted_to? :edit, @user %>
-      		<%= link_to 'Edit', edit_user_path(user) %>
+	 <td> <% if permitted_to? :edit, user %>
+      		<%= link_to 'Edit User', edit_user_path(user) %>
       	  <% end %></td>
-	<td><% if permitted_to? :delete, @user %>
-      		<%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %>
+	<td><% if permitted_to? :delete, user %>
+      		<%= link_to 'Delete User', user, confirm: 'Are you sure?', method: :delete %>
     	<% end %></td>
     </tr>
 <% end %>

@@ -10,11 +10,12 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-
-    <!-- Le styles -->
-    <%= stylesheet_link_tag "application" %>
+	<!-- Le Javascript -->
     <%= javascript_include_tag "application" %>
     <%= yield :javascript_includes %>
+
+    <!-- Le styles -->
+	<%= stylesheet_link_tag "application" %>
     <%= csrf_meta_tags %>
     <style type="text/css">
       /* Override some defaults */
@@ -92,7 +93,7 @@
         			<%= form_tag sessions_path, do %>
         		    	<%= text_field_tag :username, params[:username], :class => "input-small" %>
         		    	<%= password_field_tag :password, nil, :class => "input-small" %>
-        		  
+        		  		
                 		<%= submit_tag "Log in" %>
         			 <% end %>
         		  <% end %>
@@ -100,7 +101,6 @@
        </div>
       </div>
     </div>
-
     <% flash.each do |name, msg| %>
       <%= content_tag :div, msg, class: "alert-message #{name}" %> 
     <% end %>
