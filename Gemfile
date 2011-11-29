@@ -4,16 +4,15 @@ gem 'rails', '3.1.0'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
-
+gem 'mongrel'
 gem 'sqlite3'
-gem 'sorcery'
 gem 'declarative_authorization'
 gem 'carmen'
 gem "nifty-generators", :group => :development
 gem 'mocha'
-gem 'aws-s3'
-gem 'paperclip', "~> 2.4"
-
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'sorcery'
 
 # Gems used only for assets and not required
 # in production environments by default.

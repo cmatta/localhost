@@ -11,11 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111121203902) do
+ActiveRecord::Schema.define(:version => 20111128223147) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,28 +52,18 @@ ActiveRecord::Schema.define(:version => 20111121203902) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "username",                                    :null => false
     t.string   "email"
-    t.string   "crypted_password"
-    t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remember_me_token"
-    t.datetime "remember_me_token_expires_at"
-    t.integer  "zipcode",                      :limit => 255
-    t.string   "address_field1"
-    t.string   "address_field2"
-    t.string   "city"
-    t.string   "state"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "profilepic_file_name"
-    t.string   "profilepic_content_type"
-    t.integer  "profilepic_file_size"
-    t.datetime "profilepic_updated_at"
-    t.string   "roles"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "facebook_url"
+    t.string   "city"
+    t.string   "state"
+    t.string   "gender"
   end
-
-  add_index "users", ["remember_me_token"], :name => "index_users_on_remember_me_token"
 
 end

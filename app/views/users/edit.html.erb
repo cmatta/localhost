@@ -11,26 +11,19 @@
   <div class="actions">
   	
 	<ul class="unstyled">
-		<li>Username: <%= @user.username %></li>
 		<li>Email Address: <%= @user.email %></li>
-		<% if @user.profilepic %>
-			<li><%= image_tag @user.profilepic.url(:small) %></li>
-		<% else %>
-			<li>no profile picture uploaded, upload one now:</li>
-			<li><%= f.file_field :profilepic %></li>
-		<% end %>
+		
 	    <li><%= f.label :first_name, "First Name" %><%= f.text_field :first_name %>
 	    <li><%= f.label :last_name, "Last Name" %><%= f.text_field :last_name %>
-		<li><%= f.label :address_field1, "Address" %><%= f.text_field :address_field1 %></li>
-		<li><%= f.label :address_field2, "" %><%= f.text_field :address_field2 %></li>
-    <li><%= f.label :city, "City" %><%= f.text_field :city %></li>
+    	<li><%= f.label :city, "City" %><%= f.text_field :city %></li>
 		<li><%= f.label :state, "State" %><%= f.select :state, Carmen::states('US') %></li>
-    <li><%= f.label :zipcode, "Zipcode" %><%= f.text_field :zipcode, :size => 5 %></li>
-    <li>&nbsp;</li>
-	<% for role in Role.all %>
-	      <%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
-	      <%=h role.name %><br />
-	<% end %>
+	    <li>&nbsp;</li>
+		<% if permitted_to? :edit, @user.roles %>
+			<% for role in Role.all %>
+				<%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+				<%=h role.name %><br />
+			<% end %>
+		<% end %>
 		<li><%= f.submit 'Submit', :class=> "btn" %></li>
 	</ul>
     

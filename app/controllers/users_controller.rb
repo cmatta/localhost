@@ -1,33 +1,27 @@
 class UsersController < ApplicationController
   before_filter :require_login, except: [:new, :create, :show]
-  
+
   filter_access_to :edit, :update, :attribute_check => true
   
-  def new
-    @user = User.new
-  end
-  
-  def create
-    @user = User.new(params[:user])
-    if @user.save
-      user = auto_login(@user)
-      redirect_to edit_user_path(user), :notice => "Account Created for #{@user.username}"
-    else
-      render :new
-    end
-  end
-
   def index
-    @user = User.all
+      @user = User.all
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render json: @user }
+      end
+  end
+    
+  def show
+    @user = User.find(params[:id])
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @user }
+      format.html
+      format.json { render json: @user}
     end
   end
-
+  
   def edit
-    @user = User.find(params[:id])
+      @user = User.find(params[:id])
   end
 
   def update
@@ -40,26 +34,6 @@ class UsersController < ApplicationController
         format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :ok }
-    end
-  end
-  
-
-  def show
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      format.html
-      format.json { render json: @user}
     end
   end
 end

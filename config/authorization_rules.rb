@@ -2,6 +2,7 @@ authorization do
   role :admin do
     includes [:moderator, :user, :guest]
     has_permission_on :users, to: [:read, :manage]
+    has_permission_on :roles, to: [:read, :manage]
   end
   
   role :moderator do
@@ -12,7 +13,7 @@ authorization do
   
   role :user do
     includes :guest
-    has_permission_on :friendship, to: [:create, :delete] do
+    has_permission_on :friendships, to: [:create, :delete] do
       if_attribute :user_id => is { user.id }
     end
     
