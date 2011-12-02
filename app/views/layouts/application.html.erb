@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Be My Guest</title>
+    <title>NeuHere</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -11,6 +11,7 @@
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 	<!-- Le Javascript -->
+	<%= javascript_include_tag "application" %>
     <%= yield :javascript_includes %>
     <!-- Le styles -->
 	<%= stylesheet_link_tag "application" %>
@@ -77,15 +78,15 @@
     <div class="topbar">
       <div class="fill">
         <div class="container">
-          <a class="brand" href="<%= root_url %>">Be My Guest</a>
+          <a class="brand" href="<%= root_url %>">neuHere</a>
           <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li><a href="<%= root_url %>">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="<%= users_url %>">Users</a></li>
           </ul>
             <div class="pull-right">
         		  <% if current_user %>
-        			 <p>Signed in as <%= link_to current_user.name, user_path(current_user) %> (<%= link_to "Sign Out", logout_path %>)</p>
+        			 <p>Signed in as <%= link_to current_user.name, user_path(current_user) %> <%= link_to "| Sign Out", logout_path %></p>
         		  <% else %>
 					<p><%= link_to "Sign in with Facebook", "/auth/facebook" %></p>
         		  <% end %>

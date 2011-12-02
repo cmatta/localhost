@@ -9,14 +9,22 @@
   <% end %>
 
   <div class="actions">
-  	
+  	<h3>Here's what we know about you...</h3>
 	<ul class="unstyled">
 		<li>Email Address: <%= @user.email %></li>
+		<li>Name: <%= @user.name %></li>
+		<% if @user.city %>
+    		<li>City: <%= @user.city %></li>
+		<% else %>
+			<li>City: <i>no city specified</i></li>
+		<% end %>
 		
-	    <li><%= f.label :first_name, "First Name" %><%= f.text_field :first_name %>
-	    <li><%= f.label :last_name, "Last Name" %><%= f.text_field :last_name %>
-    	<li><%= f.label :city, "City" %><%= f.text_field :city %></li>
-		<li><%= f.label :state, "State" %><%= f.select :state, Carmen::states('US') %></li>
+		<% if @user.state %>
+    		<li>State: <%= @user.state %></li>
+		<% else %>
+			<li>State: <i>no state specified</i></li>
+		<% end %>
+		
 	    <li>&nbsp;</li>
 		<% if permitted_to? :edit, @user.roles %>
 			<% for role in Role.all %>

@@ -26,7 +26,7 @@
 				<p>Average Rating:</p> <%= render "rating" %><br>
 				<% if @user != current_user %>
 					<% unless current_user.friends.find_by_id(@user) %>
-				    	<p><%= button_to "Add Friendship", friendships_path(:friend_id => user), :method => :post %></p>		
+				    	<p><%= link_to "Add Friendship", friendships_path(:friend_id => @user), :method => :post %></p>		
 					<% else %>
 						<p><%= @user.name %> is a friend.</p>
 				    <% end %>

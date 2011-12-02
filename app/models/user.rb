@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :reviews_written, :class_name => "Review", :foreign_key => 'reviewer_id'
   has_many :reviews_about, :class_name => "Review", :foreign_key => 'reviewee_id'
 
-  attr_accessible :email, :role_ids, :roles
+  attr_accessible :email
   
   after_create :create_role
   
@@ -48,7 +48,9 @@ class User < ActiveRecord::Base
   def self.create_with_omniauth(auth)
     if auth["info"]["location"]
       location = auth["info"]["location"]
-      (city, state) = location.gsub(/\s+/,"").split(/,/)
+      (city, state) = location.split(/,/)
+      city = city.strip
+      state = state.strip
     end
     create! do |user|
       user.provider = auth["provider"]

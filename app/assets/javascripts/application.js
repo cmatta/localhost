@@ -9,3 +9,7 @@
 //= require_tree .
 //= require twitter/bootstrap
 
+$(".nav > li").click(function(){
+	$(this).removeClass("active");
+	$(this).addClass("active");
+});

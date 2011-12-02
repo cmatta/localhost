@@ -16,7 +16,7 @@ authorization do
     has_permission_on :friendships, to: [:create, :delete] do
       if_attribute :user_id => is { user.id }
     end
-    
+    has_permission_on :users, to: [:read]
     has_permission_on :users, to: [:manage] do
       if_attribute :id => is { user.id }
     end
