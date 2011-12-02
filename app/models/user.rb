@@ -14,6 +14,12 @@ class User < ActiveRecord::Base
   has_many :reviews_written, :class_name => "Review", :foreign_key => 'reviewer_id'
   has_many :reviews_about, :class_name => "Review", :foreign_key => 'reviewee_id'
 
+  
+  has_many :food_relationships
+ 
+  has_many :food_exclusions, :through => :food_relationships, :class_name => "Food", :foreign_key => "user_id", :conditions => ["inclusion = ?", false] 
+  has_many :food_inclusions, :through => :food_relationships, :class_name => "Food", :foreign_key => "user_id", :conditions => ["inclusion = ?", true]
+
   attr_accessible :email
   
   after_create :create_role
