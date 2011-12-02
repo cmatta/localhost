@@ -1,0 +1,13 @@
+<%= form_for @review, :html => {:class => "form-stacked"} do |f| %>
+  
+  <div class="clearfix">
+	<%= f.hidden_field :reviewee_id, :value => params[:reviewee_id] %>
+    <p><%= f.label :title %></p>
+    <p><%= f.text_field :title %></p>
+	<p><%= f.label :rating %></p>
+	<p><%= f.select :rating, options_for_select(["1", "2", "3", "4", "5"]) %></p>
+	<p><%= f.label :body %></p>
+    <p><%= f.text_area :body, :class => "xlarge" %></p>
+    <p><%= f.submit "Submit Review" %></p>
+  </div>
+<% end %>

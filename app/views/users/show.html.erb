@@ -1,0 +1,73 @@
+
+<% if @user.errors.any? %>
+	<div id="alert-message error">
+	  <% @user.errors.full_messages.each do |msg| %>
+	    <li><%= msg %></li>
+	  <% end %>
+	  </ul>
+	</div>
+<% end %>
+<% if @user != current_user %>
+	<div class="pull-right">
+		<p><%= link_to "Write a review for this user", new_review_path(:reviewee_id => params[:id]) %></p>
+	</div>
+<% end %>
+<div class="row">
+	<div class="span4">
+		<div class="row">
+			<ul class="unstyled">
+		    <li><h2><%= @user.name %></li></h2>
+			<li><%= @user.city %>, <%= @user.state %></li>
+			<%= link_to image_tag("http://graph.facebook.com/#{@user.uid}/picture?type=square", :border => 1), @user.facebook_url %>
+				<% if permitted_to? :edit, @user %>
+					<li><%= link_to "Edit account", edit_user_path %></li>
+				<% end %>
+				</ul>
+				<p>Average Rating:</p> <%= render "rating" %><br>
+				<% if @user != current_user %>
+					<% unless current_user.friends.find_by_id(@user) %>
+				    	<p><%= link_to "Add Friendship", friendships_path(:friend_id => @user), :method => :post %></p>		
+					<% else %>
+						<p><%= @user.name %> is a friend.</p>
+				    <% end %>
+				<% end %>
+				
+		</div>
+		<div class="row">
+			<h3>Friends</h3>
+			  <ul>
+			      <% @user.friendships.each do |friendship| %>
+			        <li><%= link_to friendship.friend.name, user_path(friendship.friend.id) %> 
+						<% if permitted_to? :destroy, friendship %>
+							(<%= link_to "remove", friendship, :method => :delete %>)
+						<% end %>
+					</li>
+			      <% end %>
+
+			  </ul>
+		</div>
+		<div class="row">
+			<h3>Reviews by <%= @user.first_name %></h3>
+			  <ul>
+			      <% @user.reviews_written.each do |review| %> 
+			        <li><%= link_to review.title, review %></li>
+			      <% end %>
+			  </ul>
+		</div>
+	</div>
+	<div class="span12">
+		<div class="row">
+		  	<% @user.reviews_about.each do |review| %> 
+		        <div class="span8">
+					<h3><%= link_to review.title, review %></h3>
+					<p class="small">written by <%= link_to "#{review.reviewer.name}", user_path(review.reviewer) %></p>
+					<p><%=h truncate(review.body, :length => 250, :omission => '...(continued)') %></p>
+					<hr>
+				</div>
+		      <% end %>
+		</div>
+	</div>
+
+</div>
+
+

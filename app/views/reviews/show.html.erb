@@ -1,0 +1,19 @@
+
+<p id="notice"><%= notice %></p> 
+
+<div class="actions">
+	<div class="pull-right">
+		<% if permitted_to? :edit, @review %>
+			<%= link_to "Edit this review", edit_review_path(:reviewee_id => @review.reviewee_id) %>
+		<% end %>
+	</div>
+	<div class="review">
+		<p>This review is about: <%= link_to @review.reviewee.name, user_path(@review.reviewee)%></p>
+		<p>Rating: <%= @review.rating %></p>
+		<p class="review-title"><%= @review.title %></p>
+		<p class="review-body"><%= @review.body %></p>
+		<br>
+		<p>Reviewed By: <%= link_to @review.reviewer.name, user_path(@review.reviewer) %></p>
+		<p>on: <%= @review.created_at.to_s %>
+	</div>
+</div>

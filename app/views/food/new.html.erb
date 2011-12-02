@@ -1,0 +1,8 @@
+<%= form_for @food do |f| %>
+  
+  <div class="clearfix">
+    <p><%= f.label :name %></p>
+    <p><%= f.text_field :name %></p>
+    <p><%= f.submit "Submit Food" %></p>
+  </div>
+<% end %>

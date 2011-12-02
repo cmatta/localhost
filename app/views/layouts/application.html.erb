@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>NeuHere</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+	<!-- Le Javascript -->
+	<%= javascript_include_tag "application" %>
+    <%= yield :javascript_includes %>
+    <!-- Le styles -->
+	<%= stylesheet_link_tag "application" %>
+    <%= csrf_meta_tags %>
+    <style type="text/css">
+      /* Override some defaults */
+      html, body {
+        background-color: #eee;
+      }
+      body {
+        padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+      }
+      .container > footer p {
+        text-align: center; /* center align it with the container */
+      }
+
+      /* The white background content wrapper */
+      .content {
+        background-color: #fff;
+        padding: 20px;
+        margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+        -webkit-border-radius: 0 0 6px 6px;
+           -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+      }
+
+      /* Page header tweaks */
+      .page-header {
+        background-color: #f5f5f5;
+        padding: 20px 20px 10px;
+        margin: -20px -20px 20px;
+      }
+
+      /* Styles you shouldn't keep as they are for displaying this base example only */
+      .content .span10,
+      .content .span4 {
+        min-height: 500px;
+      }
+      /* Give a quick and non-cross-browser friendly divider */
+      .content .span4 {
+        margin-left: 0;
+        padding-left: 19px;
+        border-left: 1px solid #eee;
+      }
+
+      .topbar .btn {
+        border: 0;
+      }
+
+    </style>
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand" href="<%= root_url %>">neuHere</a>
+          <ul class="nav">
+            <li><a href="<%= root_url %>">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="<%= users_url %>">Users</a></li>
+          </ul>
+            <div class="pull-right">
+        		  <% if current_user %>
+        			 <p>Signed in as <%= link_to current_user.name, user_path(current_user) %> <%= link_to "| Sign Out", logout_path %></p>
+        		  <% else %>
+					<p><%= link_to "Sign in with Facebook", "/auth/facebook" %></p>
+        		  <% end %>
+            </div>
+       </div>
+      </div>
+    </div>
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, :class => "alert-message #{name}", 'data-alert' => "alert" %>
+    <% end %>
+    <div class="container">
+      <%= yield %>
+    </div>
+</body>
+</html>

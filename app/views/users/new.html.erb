@@ -1,0 +1,27 @@
+<%= form_for @user, :html => { :multipart => true } do |f| %>
+	<% if @user.errors.any? %>
+		<div class="alert-message error">
+			<h2>Form is invalid</h2>
+			<ul>
+				<% for message in @user.errors.full_messages %>
+					<li><%= message %></li>
+					
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+		<div class="field">
+			<ul class="unstyled">
+				<li><%= f.label :username %> <%= f.text_field :username %></li>
+				<li><%= f.label :email %> <%= f.text_field :email %></li>
+				<li><%= f.label :password %> <%= f.password_field :password %></li>
+				<li><%= f.label :password_confirmation %> <%= f.password_field :password_confirmation %></li>
+				<li><%= f.label :profilepic %> <%= f.file_field :profilepic %></li>
+				<% for role in Role.all %>
+				      <%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+				      <%=h role.name %><br />
+				<% end %>
+				<li><%= f.submit 'Submit', :class=> "btn" %></li>
+			</ul>
+		</div>
+<% 	end %>

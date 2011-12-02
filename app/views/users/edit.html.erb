@@ -1,0 +1,39 @@
+<%= form_for @user, :html => {:multipart => true } do |f| %>
+  <% if @user.errors.any? %>
+    <div id="alert-message error">
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+  	<h3>Here's what we know about you...</h3>
+	<ul class="unstyled">
+		<li>Email Address: <%= @user.email %></li>
+		<li>Name: <%= @user.name %></li>
+		<% if @user.city %>
+    		<li>City: <%= @user.city %></li>
+		<% else %>
+			<li>City: <i>no city specified</i></li>
+		<% end %>
+		
+		<% if @user.state %>
+    		<li>State: <%= @user.state %></li>
+		<% else %>
+			<li>State: <i>no state specified</i></li>
+		<% end %>
+		
+	    <li>&nbsp;</li>
+		<% if permitted_to? :edit, @user.roles %>
+			<% for role in Role.all %>
+				<%= check_box_tag "user[role_ids][]", role.id, @user.roles.include?(role) %>
+				<%=h role.name %><br />
+			<% end %>
+		<% end %>
+		<li><%= f.submit 'Submit', :class=> "btn" %></li>
+	</ul>
+    
+  </div>
+<% end %>

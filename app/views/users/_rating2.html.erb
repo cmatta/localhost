@@ -1,0 +1,18 @@
+<div class="Clear">
+	<% counter = 0 %>
+	<% offset = [0, -4, -8, -13] %>
+	<ul>
+	<% (1..@user.rating).each do |num| %>
+		<% counter = 0 if counter == 4 %>
+		<li><%= num %> <%= offset[counter] %> <%= counter %> on</li>
+		<% counter+= 1 %>
+	<% end %>
+	
+	<% (@user.rating+1..20).each do |num| %>
+		<% counter = 0 if counter == 4 %>
+		<li><%= num %> <%= offset[counter] %> <%= counter %> off</li>
+		<% counter+= 1 %>
+	<% end %>
+	
+	</ul>
+</div>

@@ -1,0 +1,25 @@
+<h1>Listing Users</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+	<th>Email</th>
+  <th>Role</th>
+  <th></th>
+  <th></th>
+  </tr>
+
+<% @user.each do |user| %>
+    <tr>
+      <td><%= link_to "#{user.name}", user %></td>
+      <td><%= user.email%></td>
+      <td><% user.roles.each do |role| %><%= role.name %> <% end %></td>
+	 <td> <% if permitted_to? :edit, user %>
+      		<%= link_to 'Edit User', edit_user_path(user) %>
+      	  <% end %></td>
+	<td><% if permitted_to? :delete, user %>
+      		<%= link_to 'Delete User', user, confirm: 'Are you sure?', method: :delete %>
+    	<% end %></td>
+    </tr>
+<% end %>
+</table>

@@ -1,0 +1,13 @@
+one:
+  reviewer_id: 1
+  reviewee_id: 1
+  title: MyString
+  body: MyText
+  rating: 1
+
+two:
+  reviewer_id: 1
+  reviewee_id: 1
+  title: MyString
+  body: MyText
+  rating: 1
